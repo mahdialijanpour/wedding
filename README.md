@@ -26,7 +26,7 @@ npm run preview
 
 - نام‌ها، شعر، تاریخ، ساعت و آدرس: `src/data/invitation.js`
 - نام‌های کوچک بالا و نام‌های خانوادگی پایین: `firstNames` و `familyNames` در فایل اطلاعات مراسم
-- عکس فعلی: `src/assets/childhood-wedding-portrait.png`؛ عکس مشترک کودکی با لباس عروس و داماد. نسخه‌های بزرگسالی نیز حفظ شده‌اند
+- عکس فعلی: `src/assets/childhood-portrait-supplied.jpg`؛ عکس ارسالی کاربر با لباس عروس و داماد. نسخه‌های قبلی نیز حفظ شده‌اند
 - آهنگ: `src/assets/babe-delami.mp3`؛ ثانیهٔ شروع و بلندی صدا در `music` در فایل اطلاعات مراسم
 - ظاهر و اندازه‌ها: `src/styles.css`
 - اجزای کارت: `src/components/InvitationCard.jsx`
@@ -50,4 +50,4 @@ npm run preview
 
 منبع فونت تاریخ: https://github.com/google/fonts/tree/main/ofl/lobster
 
-عکس فعلی با ابزار داخلی ImageGen از دو عکس کودکی ساخته شده و لباس عروس و داماد متناسب با سن کودکی به آن اضافه شده است. دستور کامل ترکیب و ادیت در `childhood-portrait-edit-prompt.txt` ذخیره شده است. عکس بزرگسالی قبلی و دستور ادیت آن در `portrait-edit-prompt-v3.txt` نیز حفظ شده‌اند.
+عکس فعلی همان عکس رنگی ارسالی کاربر است و بدون ادیت در کارت استفاده می‌شود. عکس‌های تولیدشدهٔ قبلی و دستورهای ادیت آن‌ها برای نگهداری سابقه داخل پروژه حفظ شده‌اند.

@@ -1,4 +1,4 @@
-import portrait from '../assets/childhood-wedding-portrait.png';
+import portrait from '../assets/childhood-portrait-supplied.jpg';
 import soundtrack from '../assets/babe-delami.mp3';
 
 // Change the invitation here. The map QR code is generated from mapQuery.
