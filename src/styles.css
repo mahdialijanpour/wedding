@@ -1,0 +1,71 @@
+@font-face {
+  font-family: Nastaliq;
+  src: url('./assets/IranNastaliq.ttf') format('truetype');
+  font-display: block;
+}
+@font-face {
+  font-family: DateScript;
+  src: url('./assets/Lobster-Regular.ttf') format('truetype');
+  font-display: block;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root { font-family: Tahoma, Arial, sans-serif; color: #292724; background: #f0eeea; font-synthesis: none; }
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; width: 100%; min-width: 280px; min-height: 100%; }
+body { overflow-x: hidden; }
+a { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible { outline: 2px solid #77624f; outline-offset: 4px; }
+.app-shell { height: 100vh; height: 100dvh; min-height: 320px; padding: 12px 16px; display: flex; flex-direction: column; align-items: center; background: #f0eeea; }
+.card-content { position: absolute; inset: 0; }
+.card-entry { position: absolute; inset: 0; display: grid; place-items: center; background: #fff; }
+.card-start-button { position: relative; display: grid; place-items: center; width: 132px; height: 132px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform .3s ease; isolation: isolate; }
+.card-start-button::before { content: ''; position: absolute; inset: 4px; border: 1px solid #c9b69a66; border-radius: 50%; background: radial-gradient(circle, #f7f3ed 55%, #fff 72%); z-index: -1; }
+.card-start-button::after { content: ''; position: absolute; inset: -7px; border: 1px solid #c9b69a35; border-radius: 50%; z-index: -2; animation: play-halo 3.8s ease-in-out infinite; }
+.play-circle { position: relative; display: grid; place-items: center; width: 96px; height: 96px; border: 1px solid #4d443b; border-radius: 50%; background: linear-gradient(145deg, #51473e, #292622 68%); color: #f3e9d9; box-shadow: inset 0 1px 1px #ffffff25, 0 10px 24px #32291c20, 0 2px 5px #32291c15; transition: box-shadow .3s ease, background .3s ease; }
+.play-circle::after { content: ''; position: absolute; inset: 5px; border: 1px solid #e7d3b414; border-radius: 50%; pointer-events: none; }
+.start-play-icon { transform: translateX(1px); }
+.card-start-button:hover { transform: translateY(-2px); }
+.card-start-button:hover .play-circle { background: linear-gradient(145deg, #68594b, #38312a 68%); box-shadow: inset 0 1px 1px #ffffff30, 0 14px 28px #32291c28; }
+.card-start-button:active { transform: scale(.96); }
+.card-start-button:disabled { cursor: wait; }
+.card-start-button:disabled { transform: none; }
+.start-loader { animation: play-loading 1s linear infinite; }
+@keyframes play-halo { 0%, 100% { transform: scale(.98); opacity: .45; } 50% { transform: scale(1.055); opacity: 1; } }
+@keyframes play-loading { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .card-start-button, .play-circle { transition: none; } .card-start-button::after, .start-loader { animation: none; } .card-start-button:hover, .card-start-button:active { transform: none; } }
+.presentation { position: relative; flex: 1; width: 100%; min-height: 0; }
+.card-stage { height: 100%; width: 100%; display: grid; place-items: center; }
+.card-frame { position: relative; flex: none; box-shadow: 0 6px 35px #32291c12; }
+.invitation-card { position: absolute; left: 0; top: 0; width: 486px; height: 864px; transform-origin: top left; background: #fff; color: #111; overflow: hidden; font-family: Nastaliq, serif; }
+.presentation:not(.is-ready) .card-frame { visibility: hidden; }
+.portrait { position: absolute; left: 84px; top: 12px; width: 320px; height: 394px; border-radius: 50% 50% 0 0 / 30% 30% 0 0; overflow: hidden; background: #e3e3e3; }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 47%; }
+.date-stack { position: absolute; left: 9px; top: 116px; width: 64px; direction: ltr; text-align: center; display: grid; gap: 46px; font-family: DateScript, serif; font-size: 32px; font-weight: 400; line-height: 1.3; }
+.date-stack span:last-child { font-size: 28px; }
+.card-text { position: absolute; left: 18px; right: 18px; text-align: center; white-space: nowrap; line-height: 1.9; margin: 0; font-weight: 400; }
+.intro { top: 411px; font-size: 22px; }
+.names { top: 466px; left: 18px; right: 22px; font-size: 40px; text-align: right; }
+.names span { display: inline-block; }
+.poem { top: 577px; left: 24px; right: 24px; position: absolute; text-align: center; }
+.poem p { height: 62px; line-height: 1.8; font-size: 24px; margin: 0; white-space: nowrap; }
+.poem-line-text { display: inline-block; }
+.family-names { top: 790px; left: 14px; right: auto; font-size: 28px; text-align: left; }
+.welcome { top: 418px; font-size: 23px; }
+.calendar { position: absolute; top: 490px; left: 121px; width: 252px; height: 57px; border-bottom: 2px solid #181818; direction: rtl; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center; text-align: center; }
+.calendar-wing { border-top: 1px solid #747474; height: 54px; line-height: 2.2; font-size: 24px; }
+.calendar-month { font-size: 21px; }
+.calendar-day { font-size: 43px; line-height: 1.2; margin-top: -8px; }
+.ceremony-time { top: 548px; font-size: 20px; }
+.venue-title { top: 582px; font-size: 28px; }
+.address { top: 636px; font-size: 25px; }
+.map-link { position: absolute; top: 704px; left: 198px; width: 90px; height: 90px; color: inherit; }
+.map-link img { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.closing { top: 808px; font-size: 20px; }
+.loading-message { position: absolute; inset: 0; margin: 0; display: grid; place-items: center; font: 28px Nastaliq, serif; color: #70675e; }
+.error-message { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 3; max-width: calc(100% - 32px); padding: 14px 20px; margin: 0; border-radius: 10px; font-size: 12px; line-height: 2; background: #fff7eb; box-shadow: 0 5px 25px #0001; }
+@media (max-width: 520px) {
+  .app-shell { padding: 0; }
+  .card-frame { box-shadow: none; }
+}

@@ -1,0 +1,21 @@
+Mode: built-in ImageGen; edit; identity-preserve.
+Final asset: src/assets/wedding-portrait-v3.png
+Target ages supplied by the user: bride 26; groom 30.
+
+First edit prompt:
+Use case: identity-preserve
+Asset type: black-and-white wedding portrait for a digital invitation.
+Input images: Image 1 is the existing wedding portrait to EDIT. Image 2 is the original groom identity reference. Image 3 is the original bride identity reference.
+Primary request: Correct the overly mature appearance in image 1. The bride is 26 years old and the groom is 30 years old; render both as youthful adults of these actual ages while strongly preserving their individual identities from the original photos.
+Make the bride's face match image 3 closely: the same large dark eyes, thick eyebrows, oval face, nose, lips, natural cheek fullness and long dark hair. Restore her fresh youthful 26-year-old appearance; avoid hollow or aged eyes and heavy nasolabial shadows.
+Make the groom's face match image 2 closely: same eye spacing, nose, mouth, jaw, beard shape and natural hairline, now clearly about 30. The previous rendering added excessive gray beard, forehead lines and tired under-eye shadows: remove these artificial aging cues. Use a naturally dark neatly groomed beard, relaxed youthful face and realistic skin.
+Keep the existing composition from image 1: man left and woman right standing closely together, black tuxedo and bow tie, white lace bridal dress and veil, bouquet, grand old carved stone architecture. Preserve pose, body proportions, framing, clothes and bouquet. Keep monochrome photography with flattering softly diffused light, slightly soften harsh facial shadows without losing texture.
+Faces must remain recognizably the people in images 2 and 3, not generic fashion models. No plastic skin, no exaggerated beautification, no changes to ethnicity, no text, watermark or border. Deliver one polished photorealistic vertical rectangular photograph, same 4:5 aspect ratio as image 1, no arch mask.
+
+Final refinement prompt:
+Use case: identity-preserve.
+Edit target: Image 1, an existing black and white wedding photo. Identity references: Image 2 is the actual groom, Image 3 is the actual bride.
+Please visibly correct their ages. In the target the groom still looks 45; he is actually only 30. The bride is only 26. Make both look naturally young adult, with the SAME recognizable facial features as the original references.
+Specific essential change: groom's short beard must be uniformly DARK BLACK, with NO gray strands or white patch on the chin. Smooth the excessive wrinkles and rough aged texture of his forehead and under-eyes. Gently restore youthful cheek fullness. Keep the same receding hairline and natural short black hair, same eyebrows, eyes, nose and smile. He must read as a healthy, fresh 30-year-old man.
+Bride: fresh 26-year-old face with natural healthy fullness and soft undereye shading like her original selfie, same thick brows and large expressive eyes; do not create a new generic face. Light natural bridal makeup.
+Preserve clothing, pose, bouquet, positions, framing, carved stone backdrop, photographic black-and-white style and 4:5 vertical aspect ratio. Use soft light and realistic skin texture, no plastic airbrushing. Photo only, no text or borders.
