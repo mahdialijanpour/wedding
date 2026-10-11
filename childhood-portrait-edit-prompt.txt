@@ -1,0 +1,22 @@
+Mode: built-in ImageGen; compositing followed by identity-preserving clothing edit.
+Final asset: src/assets/childhood-wedding-portrait.png
+
+Composite prompt:
+Use case: compositing and identity-preserve.
+Asset type: a single nostalgic childhood photograph for the top portrait of a Persian digital wedding invitation.
+Input images: Image 1 is the boy's real childhood identity and clothing reference; Image 2 is the girl's real childhood identity and clothing reference.
+Primary request: Combine the two children from their separate old photographs into one beautifully restored, believable black-and-white childhood photo. Faithfully preserve each child's recognizable face, apparent childhood age, eyes, nose, mouth, haircut and expression. Do not age them into adults or invent generic children.
+Composition: vertical 4:5 rectangular photograph, the boy on the left and the little girl on the right sitting naturally side by side, both clearly visible from the waist up. Keep both faces comfortably inside the central 70 percent of the image, with room above their heads for an arch-shaped crop. The boy is older/taller as in his reference, the girl remains a toddler as in hers. Natural innocent childhood expressions, warm nostalgic mood.
+Clothes: retain the boy's simple dark collared shirt and the girl's white childhood dress and large pale hat/bow from the references, with natural age-appropriate fit. Do not dress them as a bride or groom.
+Backdrop: softly blurred old stone courtyard and classic carved stone architecture, subtle and quiet to match a monochrome invitation. Soft diffused daylight, consistent perspective and lighting across both children. Fine analog photograph grain, restored detail and natural skin, no plastic airbrushing or artificial glamour.
+Constraints: this is a normal childhood group portrait, not a wedding ceremony or romantic scene. Remove the partial adult hand/other people from the original photos. Only these two children. Preserve the original facial identities aggressively; their slight vintage imperfections are preferable to a changed face. No text, dates, logos, watermark, border, collage divider or arch mask. One continuous photographic scene.
+
+Final clothing edit prompt:
+Use case: identity-preserve, clothing edit.
+Asset type: nostalgic black-and-white portrait for a digital wedding invitation.
+Input images: Image 1 is the composite childhood portrait to edit. Image 2 is the original boy face reference, image 3 is the original little girl face reference.
+Primary request: Change ONLY the children's clothes into miniature groom and bride outfits. Keep them the same children, same ages, facial identities, hair, expressions, seated positions, hands, body proportions, composition and stone backdrop as image 1.
+Boy on left: well-fitted child-sized black tuxedo jacket and trousers, crisp white shirt, black bow tie and a tiny white boutonniere. Retain his youthful face and short dark hairstyle exactly.
+Little girl on right: an age-appropriate child-sized white bridal-style satin and lace dress with a high rounded neckline, delicate puff sleeves, full skirt and a small light tulle veil with a simple white bow. Keep her toddler proportions, exact original face and natural curly fringe. No adult makeup, no adult body shape, no low neckline.
+Both continue sitting naturally side by side with hands resting in their own laps as in the composite. Treat this as a playful formal costume portrait for the invitation, not a wedding ceremony. Innocent childhood expressions.
+Preserve soft diffused lighting, old-photo monochrome grain, natural skin texture and the same subtly blurred carved stone courtyard. Faces must be recognizable as the original children, not generic models. No changes to backdrop or camera angle. 4:5 vertical rectangular image, no arch clipping. No text, logos, watermark, borders, extra people or accessories beyond the clothing described.
