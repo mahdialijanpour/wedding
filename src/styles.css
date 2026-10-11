@@ -51,7 +51,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #77624f; outline-offs
 .poem { top: 577px; left: 24px; right: 24px; position: absolute; text-align: center; }
 .poem p { height: 62px; line-height: 1.8; font-size: 24px; margin: 0; white-space: nowrap; }
 .poem-line-text { display: inline-block; }
-.family-names { top: 790px; left: 14px; right: auto; font-size: 28px; text-align: left; }
+.family-names { top: 778px; left: 40px; right: auto; padding: 0 14px; font-size: 32px; line-height: 2; direction: rtl; text-align: right; }
 .welcome { top: 418px; font-size: 23px; }
 .calendar { position: absolute; top: 490px; left: 121px; width: 252px; height: 57px; border-bottom: 2px solid #181818; direction: rtl; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center; text-align: center; }
 .calendar-wing { border-top: 1px solid #747474; height: 54px; line-height: 2.2; font-size: 24px; }

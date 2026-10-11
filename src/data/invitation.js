@@ -6,7 +6,7 @@ export const invitation = {
   bride: 'حدیث نگین راز',
   groom: 'حسن صفافر',
   firstNames: 'حدیث و حسن',
-  familyNames: 'نگین راز - صفافر',
+  familyNames: 'نگین راز و صفافر',
   portrait,
   music: { src: soundtrack, startAt: 12, volume: 0.7 },
   intro: 'به نام عشق و پیمانش',

@@ -65,7 +65,7 @@ export default function InvitationCard({ time, started, isStarting, onStart, red
               <Animated {...animation} as="p" key={index} start={3.8 + index * 1.6} end={14.8} reveal={1.5}><span className="poem-line-text">{line}</span></Animated>
             ))}
           </div>
-          <Animated {...animation} as="p" className="card-text family-names" start={8.8} end={14.8} reveal={1.5}>{invitation.familyNames}</Animated>
+          <Animated {...animation} as="p" className="card-text family-names" start={8.8} end={14.8}>{invitation.familyNames}</Animated>
           <Animated {...animation} as="p" className="card-text welcome" start={16.2} reveal={1.7}>{invitation.welcome}</Animated>
           <Animated {...animation} as="time" className="calendar" dateTime={invitation.date.iso} start={18.1}>
             <span className="calendar-wing">{invitation.date.weekday}</span>
