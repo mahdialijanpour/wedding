@@ -51,7 +51,7 @@ export default function InvitationCard({ time, started, isStarting, onStart, red
         <article ref={cardRef} className="invitation-card" aria-label={`جشن پیوند ${invitation.bride} و ${invitation.groom}`} style={{ transform: `scale(${scale})` }}>
           <div className="card-content" aria-hidden={!started} inert={!started} style={{ opacity: started ? 1 : 0 }}>
           <div className="portrait" style={{ opacity: portraitProgress, transform: portraitProgress < 1 ? `translateY(${(1 - portraitProgress) * 16}px)` : 'none', filter: portraitProgress < 1 ? `blur(${(1 - portraitProgress) * 5}px)` : 'none' }}>
-            <img ref={imageRef} src={invitation.portrait} alt="عکس کودکی حدیث و حسن با لباس عروس و داماد" fetchPriority="high" style={{ transform: portraitProgress < 1 ? `scale(${1 + (1 - portraitProgress) * 0.12})` : 'none' }} />
+            <img ref={imageRef} src={invitation.portrait} alt="عکس عروسی حدیث و حسن" fetchPriority="high" style={{ transform: portraitProgress < 1 ? `scale(${1 + (1 - portraitProgress) * 0.12})` : 'none' }} />
           </div>
           <Animated {...animation} className="date-stack" start={0} end={15.1}>
             {invitation.date.gregorian.map((part, i) => <span key={i}>{part}</span>)}
