@@ -5,7 +5,14 @@ import './style.css';
 
 const fa = value => String(value).replace(/\d/g, n => '۰۱۲۳۴۵۶۷۸۹'[n]);
 const motionAllowed = () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const dateParts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tehran', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date(wedding.dateTime));
+const dateParts = new Intl.DateTimeFormat('en-US', {
+  calendar: 'persian',
+  numberingSystem: 'latn',
+  timeZone: 'Asia/Tehran',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+}).formatToParts(new Date(wedding.dateTime));
 const datePart = type => dateParts.find(part => part.type === type).value;
 
 function Ornament({ light = false }) {
@@ -113,7 +120,7 @@ function App() {
         <a className="scroll-cue" href="#date"><span>برای تماشای ادامهٔ قصه، ورق بزنید</span><span className="mouse"><i/></span><ArrowDown size={14}/></a>
       </header>
 
-      <section id="date" className="date-section section reveal" aria-label="تاریخ مراسم؛ ۷ آذر ۱۴۰۵ برابر با ۲۸ نوامبر ۲۰۲۶">
+      <section id="date" className="date-section section reveal" aria-label={`تاریخ مراسم؛ ${wedding.date}`}>
         <h2 className="scratch-heading" dir="ltr" lang="en"><span aria-hidden="true">✦</span>Scratch to reveal the date<span aria-hidden="true">✦</span></h2>
         <div className="date-row" dir="ltr" lang="en"><ScratchTile value={datePart('year')} label="YEAR" accessibleLabel="سال" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value={datePart('month')} label="MONTH" accessibleLabel="ماه" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value={datePart('day')} label="DAY" accessibleLabel="روز" onReveal={() => setRevealed(n => n + 1)}/></div>
         <div className="sr-only" aria-live="polite">{revealed === 3 ? 'شنبه، هفتم آذر هزار و چهارصد و پنج' : 'روی کارت‌ها بکشید یا برای نمایش تاریخ کلید ورود را بزنید.'}</div>

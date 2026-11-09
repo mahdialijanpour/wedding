@@ -43,7 +43,7 @@
 .invocation{font-size:29px;margin:0 0 18px;line-height:2.6}
 .couple-names{display:grid;grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr);align-items:start;width:220px;max-width:100%;margin:0 auto 32px;direction:rtl;color:#111}
 .person-name h2{font-family:Nastaliq,serif;font-size:46px;font-weight:400;line-height:1.65;margin:0}
-.person-name>span{display:block;font-size:25px;line-height:1.8;white-space:nowrap;margin-top:8px}
+.person-name>span{display:block;font-size:22px;line-height:1.8;white-space:nowrap;margin-top:15px}
 .name-join{font-size:34px;line-height:2.15}
 .letter{font-size:27px;line-height:2.7;color:#111}
 .poem-couplet{display:grid;grid-template-columns:1fr 1fr;column-gap:18px;direction:rtl;margin:0 0 14px;align-items:center}
@@ -88,5 +88,5 @@ footer{text-align:center;padding:48px 30px 90px;background:#f3f1e9;position:rela
 
 .date-section .scratch-heading{font-family:Georgia,'Times New Roman',serif;font-size:clamp(19px,5.7vw,30px);font-weight:400;letter-spacing:1.55px;display:flex;align-items:center;justify-content:center;gap:9px;line-height:1.4;white-space:nowrap;margin:0 -10px;color:#879da8}
 .scratch-heading>span{font-family:Georgia,serif;font-size:.94em;letter-spacing:0;color:#879da8}
-@media(max-width:420px){.date-section{padding:42px 22px 65px}.date-row{margin:35px 4px 0;gap:12px}.scratch-tile{border-radius:22px}.date-label{font-size:11px;letter-spacing:2px;margin-top:19px}.date-section .scratch-heading{letter-spacing:1px;gap:7px}.couple-names{width:206px}.person-name h2{font-size:44px}.person-name>span{font-size:24px}}
+@media(max-width:420px){.date-section{padding:42px 22px 65px}.date-row{margin:35px 4px 0;gap:12px}.scratch-tile{border-radius:22px}.date-label{font-size:11px;letter-spacing:2px;margin-top:19px}.date-section .scratch-heading{letter-spacing:1px;gap:7px}.couple-names{width:206px}.person-name h2{font-size:44px}.person-name>span{font-size:21px}}
 @media(max-width:350px){.date-section{padding-left:19px;padding-right:19px}.date-row{gap:10px}.date-section .scratch-heading{font-size:18px;letter-spacing:.8px;gap:6px}.date-value{font-size:31px}}
