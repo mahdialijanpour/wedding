@@ -5,25 +5,26 @@ import './style.css';
 
 const fa = value => String(value).replace(/\d/g, n => '۰۱۲۳۴۵۶۷۸۹'[n]);
 const motionAllowed = () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dateParts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tehran', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date(wedding.dateTime));
+const datePart = type => dateParts.find(part => part.type === type).value;
 
 function Ornament({ light = false }) {
   return <div className={`ornament ${light ? 'light' : ''}`} aria-hidden="true"><span/><span>❦</span><span/></div>;
 }
 
-function ScratchTile({ value, label, onReveal }) {
+function ScratchTile({ value, label, accessibleLabel, onReveal }) {
   const canvas = useRef(null), drawing = useRef(false), previous = useRef(null), checks = useRef(0);
   const [revealed, setRevealed] = useState(false);
   useEffect(() => {
     const el = canvas.current;
     const ctx = el.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 240, 300);
-    gradient.addColorStop(0, '#a3b8bd'); gradient.addColorStop(.5, '#91aab1'); gradient.addColorStop(1, '#78959e');
+    gradient.addColorStop(0, '#93adb6'); gradient.addColorStop(.5, '#8ca8b3'); gradient.addColorStop(1, '#82a1ae');
     ctx.fillStyle = gradient; ctx.fillRect(0, 0, 240, 300);
-    for (let i = 0; i < 3000; i++) {
-      ctx.fillStyle = i % 2 ? '#ffffff12' : '#203e4b09';
-      ctx.fillRect(Math.random() * 240, Math.random() * 300, 1.5, 1.5);
+    for (let i = 0; i < 22000; i++) {
+      ctx.fillStyle = i % 2 ? '#ffffff12' : '#203e4b0a';
+      ctx.fillRect(Math.random() * 240, Math.random() * 300, 1, 1);
     }
-    ctx.fillStyle = '#ecf1edb0'; ctx.textAlign = 'center'; ctx.font = '27px Georgia'; ctx.fillText('✧', 120, 164);
   }, []);
   function reveal() { if (!revealed) { setRevealed(true); onReveal(); } }
   function scratch(e) {
@@ -41,7 +42,7 @@ function ScratchTile({ value, label, onReveal }) {
   }
   return <div className="date-column"><div className={`scratch-tile ${revealed ? 'revealed' : ''}`}>
     <span className="date-value">{value}</span>
-    <canvas ref={canvas} width="240" height="300" role="button" tabIndex={revealed ? -1 : 0} aria-label={`نمایش ${label} مراسم`} aria-pressed={revealed}
+    <canvas ref={canvas} width="240" height="300" role="button" tabIndex={revealed ? -1 : 0} aria-label={`نمایش ${accessibleLabel} مراسم`} aria-pressed={revealed}
       onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } }}
       onPointerDown={e => { drawing.current = true; previous.current = null; e.currentTarget.setPointerCapture(e.pointerId); scratch(e); }}
       onPointerMove={scratch} onPointerUp={() => { drawing.current = false; previous.current = null; }} onPointerCancel={() => { drawing.current = false; previous.current = null; }}/>
@@ -112,9 +113,10 @@ function App() {
         <a className="scroll-cue" href="#date"><span>برای تماشای ادامهٔ قصه، ورق بزنید</span><span className="mouse"><i/></span><ArrowDown size={14}/></a>
       </header>
 
-      <section id="date" className="date-section section reveal"><span className="eyebrow">SAVE OUR DATE</span><h2 className="scratch-heading"><span aria-hidden="true">✦</span>تاریخ جشن ما را آشکار کنید<span aria-hidden="true">✦</span></h2><p className="section-note">روی کارت‌ها بکشید تا تاریخ نمایان شود</p>
-        <div className="date-row" dir="ltr"><ScratchTile value="۱۴۰۵" label="سال" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value="آذر" label="ماه" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value="۷" label="روز" onReveal={() => setRevealed(n => n + 1)}/></div>
-        <div className={`date-revealed ${revealed === 3 ? 'visible' : ''}`} aria-live="polite">{revealed === 3 ? 'شنبه، هفتم آذر هزار و چهارصد و پنج' : 'سه کارت، یک روزِ فراموش‌نشدنی'}</div>
+      <section id="date" className="date-section section reveal" aria-label="تاریخ مراسم؛ ۷ آذر ۱۴۰۵ برابر با ۲۸ نوامبر ۲۰۲۶">
+        <h2 className="scratch-heading" dir="ltr" lang="en"><span aria-hidden="true">✦</span>Scratch to reveal the date<span aria-hidden="true">✦</span></h2>
+        <div className="date-row" dir="ltr" lang="en"><ScratchTile value={datePart('year')} label="YEAR" accessibleLabel="سال" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value={datePart('month')} label="MONTH" accessibleLabel="ماه" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value={datePart('day')} label="DAY" accessibleLabel="روز" onReveal={() => setRevealed(n => n + 1)}/></div>
+        <div className="sr-only" aria-live="polite">{revealed === 3 ? 'شنبه، هفتم آذر هزار و چهارصد و پنج' : 'روی کارت‌ها بکشید یا برای نمایش تاریخ کلید ورود را بزنید.'}</div>
       </section>
 
       <section className="love-letter section reveal" aria-label="متن دعوت‌نامه">
