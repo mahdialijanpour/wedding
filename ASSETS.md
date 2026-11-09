@@ -19,3 +19,7 @@ Prompt: Use case: photorealistic-natural. Asset for elegant wedding invitation. 
 `public/audio/wedding.mp3`: audio extracted from user-provided `Recording 2026-11-09 141103.mp4`, with a short fade at each end.
 
 Fonts: Vazirmatn, Noto Nastaliq Urdu, Great Vibes, downloaded from Google Fonts and served locally. License files accompany the fonts.
+
+## Typography revision
+
+Invitation calligraphy now uses IranNastaliq from https://github.com/farsi-fonts/fonts-irannastaliq (SIL OFL, bundled as public/fonts/IranNastaliq-LICENSE.txt). The former generated couple portrait is retained as an unused source asset; it is no longer rendered or loaded by the page.
