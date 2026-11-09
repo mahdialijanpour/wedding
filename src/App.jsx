@@ -109,7 +109,7 @@ function App() {
         <img className="palace" src="/images/palace.webp" alt="عمارت باشکوه و نورانی با گل‌های سفید در آسمان شب" fetchPriority="high"/>
         <div className="hero-shade"/><div className="stars" aria-hidden="true">{Array.from({ length: 28 }, (_, i) => <i key={i} style={{ '--x': `${(i * 37 + 9) % 100}%`, '--y': `${(i * 23 + 4) % 70}%`, '--delay': `${i * .37}s` }}/>)}</div>
         <div className="fireworks" aria-hidden="true">{[0, 1, 2].map(burst => <div className={`firework burst-${burst}`} key={burst}>{Array.from({ length: 20 }, (_, i) => { const angle = i * Math.PI / 10; return <i key={i} style={{ '--dx': `${Math.cos(angle) * 76}px`, '--dy': `${Math.sin(angle) * 76}px`, '--angle': `${i * 18}deg`, '--burst-delay': `${burst * 1.8}s` }}/>; })}</div>)}</div>
-        <div className="hero-copy"><span className="eyebrow">A LOVE STORY, A NEW BEGINNING</span><h2 dir="ltr">Sina <em>&</em> Nadia</h2><p className="hero-english" dir="ltr">are getting married…</p><Ornament light/><p className="hero-persian">به جشنِ آغازِ همیشهٔ ما دعوتید</p></div>
+        <div className="hero-copy"><span className="eyebrow">A LOVE STORY, A NEW BEGINNING</span><h2 dir="ltr">Nadia <em>&</em> Sina</h2><p className="hero-english" dir="ltr">are getting married…</p><Ornament light/><p className="hero-persian">به جشنِ آغازِ همیشهٔ ما دعوتید</p></div>
         <a className="scroll-cue" href="#date"><span>برای تماشای ادامهٔ قصه، ورق بزنید</span><span className="mouse"><i/></span><ArrowDown size={14}/></a>
       </header>
 
