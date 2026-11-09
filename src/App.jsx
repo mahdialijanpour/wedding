@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowUp, CalendarDays, Heart, MapPin, Pause, Play } from 'lucide-react';
+import { ArrowDown, ArrowUp, Heart, MapPin, Pause, Play } from 'lucide-react';
 import { wedding } from './config';
 import './style.css';
 
@@ -86,14 +86,6 @@ function App() {
     setOpening(true); toggleMusic();
     openTimer.current = setTimeout(() => { setOpened(true); window.scrollTo({ top: 0, behavior: 'instant' }); }, motionAllowed() ? 2400 : 0);
   }
-  function calendar() {
-    const icsDate = value => new Date(value).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
-    const icsText = value => value.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
-    const content = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Sina Nadia//Wedding//FA', 'CALSCALE:GREGORIAN', 'BEGIN:VEVENT', 'UID:sina-nadia-14050907@wedding', `DTSTAMP:${icsDate(Date.now())}`, `DTSTART:${icsDate(wedding.dateTime)}`, `DTEND:${icsDate(wedding.endDateTime)}`, `SUMMARY:${icsText(`جشن عروسی ${wedding.groom} و ${wedding.bride}`)}`, `LOCATION:${icsText(wedding.venue)}`, `DESCRIPTION:${wedding.isVenueExample ? 'ساعت و مکان فعلاً نمونه هستند و بعداً تأیید می‌شوند.' : 'به جشن آغاز زندگی مشترک ما دعوتید.'}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
-    const url = URL.createObjectURL(new Blob([content], { type: 'text/calendar;charset=utf-8' }));
-    const a = document.createElement('a'); a.href = url; a.download = 'Sina-Nadia-Wedding.ics'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-    notify('فایل یادآوری مراسم آماده شد.');
-  }
   function map(provider) {
     if (!wedding.coordinates) { notify('مسیریابی پس از ثبت آدرس دقیق تالار فعال می‌شود.'); return; }
     const { lat, lng } = wedding.coordinates;
@@ -120,17 +112,17 @@ function App() {
         <a className="scroll-cue" href="#date"><span>برای تماشای ادامهٔ قصه، ورق بزنید</span><span className="mouse"><i/></span><ArrowDown size={14}/></a>
       </header>
 
-      <section id="date" className="date-section section reveal"><span className="eyebrow">SAVE OUR DATE</span><h2>✦ تاریخِ قصهٔ ما را کشف کنید ✦</h2><p className="section-note">روی هر کارت بکشید تا رازِ روزمان آشکار شود</p>
+      <section id="date" className="date-section section reveal"><span className="eyebrow">SAVE OUR DATE</span><h2 className="scratch-heading"><span aria-hidden="true">✦</span>تاریخ جشن ما را آشکار کنید<span aria-hidden="true">✦</span></h2><p className="section-note">روی کارت‌ها بکشید تا تاریخ نمایان شود</p>
         <div className="date-row" dir="ltr"><ScratchTile value="۱۴۰۵" label="سال" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value="آذر" label="ماه" onReveal={() => setRevealed(n => n + 1)}/><ScratchTile value="۷" label="روز" onReveal={() => setRevealed(n => n + 1)}/></div>
         <div className={`date-revealed ${revealed === 3 ? 'visible' : ''}`} aria-live="polite">{revealed === 3 ? 'شنبه، هفتم آذر هزار و چهارصد و پنج' : 'سه کارت، یک روزِ فراموش‌نشدنی'}</div>
       </section>
 
       <section className="love-letter section reveal" aria-label="متن دعوت‌نامه">
         <p className="calligraphy invocation">به نام حضرت دوست</p>
-        <div className="couple-names calligraphy" aria-label={`${wedding.groom} و ${wedding.bride}`}>
-          <div className="person-name"><h2>سینا</h2><span>حسین زاده</span></div>
-          <span className="name-join">و</span>
+        <div className="couple-names calligraphy" aria-label={`${wedding.bride} و ${wedding.groom}`}>
           <div className="person-name"><h2>نادیا</h2><span>علیزاده نژاد</span></div>
+          <span className="name-join">و</span>
+          <div className="person-name"><h2>سینا</h2><span>حسین زاده</span></div>
         </div>
         <div className="letter calligraphy">
           <div className="poem-couplet"><p>و حالا آغاز سفریم</p><p>سفری به وسعت یک زندگی</p></div>
@@ -143,7 +135,6 @@ function App() {
       <section className="venue-section section reveal"><MapPin className="venue-pin" size={64} strokeWidth={.8}/><span className="eyebrow">WHERE WE CELEBRATE</span><h2 className="calligraphy">قرارِ عاشقانهٔ ما</h2><p className="event-date">{wedding.date}</p><div className="venue-time">از ساعت {wedding.time} تا {wedding.endTime}</div><Ornament/><h3>{wedding.venue}</h3><p className="address">{wedding.address}</p>{wedding.isVenueExample && <span className="sample-badge">مکان و ساعت نمونه · در انتظار تأیید</span>}
         <div className="map-preview" aria-label="پیش‌نمایش تزئینی نقشه؛ مکان هنوز ثبت نشده"><div className="map-road road-one"/><div className="map-road road-two"/><div className="map-road road-three"/><div className="map-road road-four"/><div className="map-park"/><div className="map-label"><MapPin size={30}/><span>اینجا، کنار هم</span><small>مکان دقیق به‌زودی</small></div></div>
         <p className="section-note">مسیرِ رسیدن به یک شبِ خاطره‌انگیز</p><div className="map-buttons">{[['neshan', 'نشان'], ['balad', 'بلد'], ['google', 'گوگل‌مپ'], ['waze', 'Waze']].map(([id, label]) => <button key={id} onClick={() => map(id)}><MapPin size={14}/>{label}</button>)}</div>
-        <button className="calendar-button" onClick={calendar}><CalendarDays size={18}/>ذخیرهٔ تاریخ در تقویم</button>
       </section>
 
       <footer><span className="script" dir="ltr">Sina & Nadia</span><p>۷ آذر ۱۴۰۵ · آغازِ یک عمر دوست داشتن</p><Heart size={15} strokeWidth={1}/><button onClick={() => window.scrollTo({ top: 0, behavior: motionAllowed() ? 'smooth' : 'instant' })} aria-label="بازگشت به ابتدای کارت"><ArrowUp size={17}/></button></footer>
