@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowUp, Heart, MapPin, Pause, Play } from 'lucide-react';
+import { ArrowDown, ArrowUp, Camera, CarFront, Cherry, Gem, Heart, HeartHandshake, MapPin, Music2, Pause, Play, Sparkles } from 'lucide-react';
 import { wedding } from './config';
 import './style.css';
 
@@ -66,6 +66,42 @@ function Countdown() {
     <p className="countdown-date">{wedding.date}</p>
     {left === 0 && <p>روزِ قشنگِ ما از راه رسید</p>}
   </section>;
+}
+
+function WeddingTimeline() {
+  const events = [
+    { label: 'ورود مهمانان', icon: Sparkles, time: wedding.time, dateTime: wedding.dateTime },
+    { label: 'مراسم عقد', icon: Gem },
+    { label: 'عکس یادگاری', icon: Camera },
+    { label: 'رقص عروس و داماد', icon: HeartHandshake },
+    { label: 'شادی و رقص خانوادگی', icon: Music2 },
+    { label: 'پذیرایی', detail: wedding.hospitality, icon: Cherry },
+    { label: 'پایان جشن', icon: CarFront, time: wedding.endTime, dateTime: wedding.endDateTime },
+  ];
+
+  return (
+    <section className="wedding-timeline reveal" aria-labelledby="wedding-timeline-title">
+      <div className="timeline-card">
+        <p className="timeline-kicker" lang="en" dir="ltr">Wedding Timeline</p>
+        <h2 id="wedding-timeline-title">برنامهٔ جشن</h2>
+        <p className="timeline-signature script" lang="en" dir="ltr">Nadia &amp; Sina</p>
+        <ol className="timeline-list" role="list">
+          {events.map(({ label, detail, icon: Icon, time, dateTime }) => (
+            <li key={label}>
+              <div className="timeline-event">
+                <Icon className="timeline-icon" strokeWidth={1.25} aria-hidden="true" />
+                <div className="timeline-copy" dir="rtl">
+                  {time && <time dateTime={dateTime} dir="ltr">{time}</time>}
+                  <span>{label}</span>
+                  {detail && <small>{detail}</small>}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
 }
 
 function App() {
@@ -140,6 +176,8 @@ function App() {
         </div>
       </section>
       <div className="reveal"><Countdown/></div>
+
+      <WeddingTimeline />
 
       <section className="venue-section section reveal">
         <MapPin className="venue-pin" size={64} strokeWidth={.8}/>

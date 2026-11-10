@@ -90,3 +90,113 @@ footer{text-align:center;padding:48px 30px 90px;background:#f3f1e9;position:rela
 .scratch-heading>span{font-family:Georgia,serif;font-size:.94em;letter-spacing:0;color:#879da8}
 @media(max-width:420px){.date-section{padding:42px 22px 65px}.date-row{margin:35px 4px 0;gap:12px}.scratch-tile{border-radius:22px}.date-label{font-size:11px;letter-spacing:2px;margin-top:19px}.date-section .scratch-heading{letter-spacing:1px;gap:7px}.couple-names{width:206px}.person-name h2{font-size:44px}.person-name>span{font-size:21px}}
 @media(max-width:350px){.date-section{padding-left:19px;padding-right:19px}.date-row{gap:10px}.date-section .scratch-heading{font-size:18px;letter-spacing:.8px;gap:6px}.date-value{font-size:31px}}
+
+.wedding-timeline {
+  padding: 0 14px;
+  text-align: center;
+}
+
+.timeline-card {
+  --timeline-line: #c4b9a8;
+  background: #f8f3e9;
+  color: #4d453b;
+  padding: 28px clamp(8px, 2.8vw, 20px) 25px;
+}
+
+.timeline-kicker {
+  margin: 0;
+  font: 400 12px var(--serif);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #746855;
+}
+
+.timeline-card h2 {
+  margin: 9px 0 0;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.timeline-signature {
+  margin: 4px 0 15px;
+  font-size: 28px;
+  color: #81715c;
+}
+
+.timeline-list {
+  position: relative;
+  direction: ltr;
+  list-style: none;
+  max-width: 410px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  inset: 7px auto 7px 50%;
+  width: 1px;
+  background: var(--timeline-line);
+}
+
+.timeline-list li {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  min-height: 61px;
+  padding: 6px 0;
+}
+
+.timeline-event {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 1.8vw, 12px);
+  min-width: 0;
+}
+
+.timeline-event::before {
+  content: '';
+  flex: 0 0 clamp(7px, 2.7vw, 17px);
+  height: 1px;
+  background: var(--timeline-line);
+}
+
+.timeline-list li:nth-child(even) .timeline-event {
+  grid-column: 1;
+  flex-direction: row-reverse;
+}
+
+.timeline-icon {
+  flex-shrink: 0;
+  width: clamp(23px, 7vw, 36px);
+  height: clamp(23px, 7vw, 36px);
+  color: #8b7b66;
+}
+
+.timeline-copy {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+}
+
+.timeline-list li:nth-child(even) .timeline-copy {
+  text-align: right;
+}
+
+.timeline-copy time,
+.timeline-copy small {
+  display: block;
+  font-size: 11px;
+}
+
+.timeline-copy time {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline-copy small {
+  color: #746855;
+}
