@@ -137,7 +137,7 @@ function App() {
     window.open(urls[provider], '_blank', 'noopener,noreferrer');
   }
   return <>
-    <audio ref={audio} src="/audio/wedding.mp3" loop preload="none"/>
+    <audio ref={audio} src="/audio/wedding-song.mp3" loop preload="none"/>
     {!opened && <div className={`envelope-screen ${opening ? 'opening' : ''}`}>
       <div className="envelope-inner" aria-hidden="true"><div className="envelope-insert"/></div>
       <div className="envelope-layer envelope-bottom-fold" aria-hidden="true"/>

@@ -16,7 +16,7 @@ Prompt: Use case: photorealistic-natural. Asset for elegant wedding invitation. 
 
 ## Audio and fonts
 
-`public/audio/wedding.mp3`: audio extracted from user-provided `Recording 2026-11-09 141103.mp4`, with a short fade at each end.
+`public/audio/wedding-song.mp3`: user-provided `p_112_131122089.mp3`, played when the invitation is opened.
 
 Fonts: Vazirmatn, Noto Nastaliq Urdu, Great Vibes, downloaded from Google Fonts and served locally. License files accompany the fonts.
 
