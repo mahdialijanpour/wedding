@@ -129,7 +129,7 @@ function App() {
       <section className="love-letter section reveal" aria-label="متن دعوت‌نامه">
         <p className="calligraphy invocation">به نام حضرت دوست</p>
         <div className="couple-names calligraphy" aria-label={`${wedding.bride} و ${wedding.groom}`}>
-          <div className="person-name"><h2>نادیا</h2><span>علیزاده نژاد</span></div>
+          <div className="person-name"><h2>نادیا</h2><span>علیرضانژاد</span></div>
           <span className="name-join">و</span>
           <div className="person-name"><h2>سینا</h2><span>حسین زاده</span></div>
         </div>
@@ -141,8 +141,17 @@ function App() {
       </section>
       <div className="reveal"><Countdown/></div>
 
-      <section className="venue-section section reveal"><MapPin className="venue-pin" size={64} strokeWidth={.8}/><span className="eyebrow">WHERE WE CELEBRATE</span><h2 className="calligraphy">قرارِ عاشقانهٔ ما</h2><p className="event-date">{wedding.date}</p><div className="venue-time">از ساعت {wedding.time} تا {wedding.endTime}</div><Ornament/><h3>{wedding.venue}</h3><p className="address">{wedding.address}</p>{wedding.isVenueExample && <span className="sample-badge">مکان و ساعت نمونه · در انتظار تأیید</span>}
-        <div className="map-preview" aria-label="پیش‌نمایش تزئینی نقشه؛ مکان هنوز ثبت نشده"><div className="map-road road-one"/><div className="map-road road-two"/><div className="map-road road-three"/><div className="map-road road-four"/><div className="map-park"/><div className="map-label"><MapPin size={30}/><span>اینجا، کنار هم</span><small>مکان دقیق به‌زودی</small></div></div>
+      <section className="venue-section section reveal">
+        <MapPin className="venue-pin" size={64} strokeWidth={.8}/>
+        <span className="eyebrow">WHERE WE CELEBRATE</span>
+        <h2 className="calligraphy">قرارِ عاشقانهٔ ما</h2>
+        <p className="event-date">{wedding.date}</p>
+        <div className="venue-time">از ساعت {wedding.time} تا {wedding.endTime}</div>
+        <p className="venue-hospitality">{wedding.hospitality}</p>
+        <Ornament/>
+        <h3>{wedding.venue}</h3>
+        <p className="address">{wedding.address}</p>
+        <div className="map-preview" aria-hidden="true"><div className="map-road road-one"/><div className="map-road road-two"/><div className="map-road road-three"/><div className="map-road road-four"/><div className="map-park"/><div className="map-label"><MapPin size={30}/><span>{wedding.venue}</span></div></div>
         <p className="section-note">مسیرِ رسیدن به یک شبِ خاطره‌انگیز</p><div className="map-buttons">{[['neshan', 'نشان'], ['balad', 'بلد'], ['google', 'گوگل‌مپ'], ['waze', 'Waze']].map(([id, label]) => <button key={id} onClick={() => map(id)}><MapPin size={14}/>{label}</button>)}</div>
       </section>
 
