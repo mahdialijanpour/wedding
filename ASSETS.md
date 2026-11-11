@@ -16,7 +16,7 @@ Prompt: Use case: photorealistic-natural. Asset for elegant wedding invitation. 
 
 ## Audio and fonts
 
-`public/audio/wedding-song.mp3`: user-provided `p_112_131122089.mp3`, played when the invitation is opened.
+`public/audio/invitation-music.mp3`: MP3 conversion of the supplied `maya.wedding.cards1794299112931.aac`, prepared before the invitation opens and played on the opening tap.
 
 Fonts: Vazirmatn, Noto Nastaliq Urdu, Great Vibes, downloaded from Google Fonts and served locally. License files accompany the fonts.
 

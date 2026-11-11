@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp, Camera, CarFront, Cherry, Gem, Heart, HeartHandshake, MapPin, Music2, Pause, Play, Sparkles } from 'lucide-react';
 import { wedding } from './config';
-import './style.css';
 
+const invitationMusic = '/audio/invitation-music.mp3';
 const fa = value => String(value).replace(/\d/g, n => '۰۱۲۳۴۵۶۷۸۹'[n]);
 const motionAllowed = () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const dateParts = new Intl.DateTimeFormat('en-US', {
@@ -14,6 +14,12 @@ const dateParts = new Intl.DateTimeFormat('en-US', {
   day: '2-digit',
 }).formatToParts(new Date(wedding.dateTime));
 const datePart = type => dateParts.find(part => part.type === type).value;
+
+function decodeImage(src) {
+  const image = new Image();
+  image.src = src;
+  return image.decode();
+}
 
 function Ornament({ light = false }) {
   return <div className={`ornament ${light ? 'light' : ''}`} aria-hidden="true"><span/><span>❦</span><span/></div>;
@@ -107,7 +113,61 @@ function WeddingTimeline() {
 function App() {
   const [opened, setOpened] = useState(false), [opening, setOpening] = useState(false), [music, setMusic] = useState(false);
   const [revealed, setRevealed] = useState(0), [toast, setToast] = useState('');
+  const [readiness, setReadiness] = useState('loading');
   const audio = useRef(null), toastTimer = useRef(null), openTimer = useRef(null);
+  useEffect(() => {
+    const player = audio.current;
+    const controller = new AbortController();
+    let musicUrl;
+    const timeout = setTimeout(() => {
+      controller.abort();
+      setReadiness('error');
+    }, 45000);
+
+    async function prepareMusic() {
+      const response = await fetch(invitationMusic, { signal: controller.signal });
+      if (!response.ok || response.headers.get('content-type')?.includes('text/html')) {
+        throw new Error('Music download failed');
+      }
+      const data = await response.arrayBuffer();
+      if (controller.signal.aborted) return;
+      if (!data.byteLength) throw new Error('Music file is empty');
+      musicUrl = URL.createObjectURL(new Blob([data], { type: 'audio/mpeg' }));
+      player.src = musicUrl;
+      player.load();
+    }
+
+    async function prepareInvitation() {
+      try {
+        const [persianFont, scriptFont] = await Promise.all([
+          document.fonts.load('14px Vazirmatn', 'برای مشاهده کارت'),
+          document.fonts.load('64px GreatVibes', 'Nadia & Sina'),
+          decodeImage('/images/envelope.webp'),
+          decodeImage('/images/palace.webp'),
+          prepareMusic(),
+        ]);
+        if (!persianFont.length || !scriptFont.length) throw new Error('Invitation stylesheet unavailable');
+        if (!controller.signal.aborted) setReadiness('ready');
+      } catch {
+        if (!controller.signal.aborted) setReadiness('error');
+        controller.abort();
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    prepareInvitation();
+    return () => {
+      clearTimeout(timeout);
+      controller.abort();
+      if (musicUrl) {
+        player.removeAttribute('src');
+        player.load();
+        URL.revokeObjectURL(musicUrl);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = opened ? '' : 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -125,9 +185,11 @@ function App() {
     else { try { await audio.current.play(); setMusic(true); } catch { notify('برای پخش موسیقی، دوباره دکمه را لمس کنید.'); } }
   }
   function openCard() {
-    if (opening) return;
+    if (opening || readiness !== 'ready') return;
+    // Start playback inside the tap handler so mobile browsers grant user activation.
+    toggleMusic();
     window.scrollTo({ top: 0, behavior: 'instant' });
-    setOpening(true); toggleMusic();
+    setOpening(true);
     openTimer.current = setTimeout(() => { setOpened(true); window.scrollTo({ top: 0, behavior: 'instant' }); }, motionAllowed() ? 2400 : 0);
   }
   function map(provider) {
@@ -136,8 +198,14 @@ function App() {
     const urls = { google: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`, neshan: `https://neshan.org/maps/@${lat},${lng},16z`, balad: `https://balad.ir/location?latitude=${lat}&longitude=${lng}`, waze: `https://www.waze.com/ul?ll=${lat},${lng}&navigate=yes` };
     window.open(urls[provider], '_blank', 'noopener,noreferrer');
   }
+  const openCaption = readiness === 'loading'
+    ? 'در حال آماده‌سازی کارت و موسیقی…'
+    : readiness === 'error'
+      ? 'بارگذاری کامل نشد. دوباره تلاش کنید.'
+      : 'برای مشاهده کارت کلیک فرمایید';
+
   return <>
-    <audio ref={audio} src="/audio/wedding-song.mp3" loop preload="none"/>
+    <audio ref={audio} loop preload="auto" />
     {!opened && <div className={`envelope-screen ${opening ? 'opening' : ''}`}>
       <div className="envelope-inner" aria-hidden="true"><div className="envelope-insert"/></div>
       <div className="envelope-layer envelope-bottom-fold" aria-hidden="true"/>
@@ -145,7 +213,14 @@ function App() {
       <div className="envelope-layer envelope-right-fold" aria-hidden="true"/>
       <div className="envelope-layer envelope-flap" aria-hidden="true"/>
       <div className="envelope-flash" aria-hidden="true"/>
-      <button className="open-envelope" onClick={openCard} disabled={opening} aria-label="باز کردن دعوت‌نامه سینا و نادیا"><span className="open-caption">برای مشاهده کارت کلیک فرمایید</span></button>
+      <button
+        className="open-envelope"
+        onClick={readiness === 'error' ? () => window.location.reload() : openCard}
+        disabled={opening || readiness === 'loading'}
+        aria-label={readiness === 'ready' ? 'باز کردن دعوت‌نامه سینا و نادیا' : undefined}
+      >
+        <span className="open-caption" aria-live="polite">{openCaption}</span>
+      </button>
     </div>}
     <main className={opened ? 'invitation is-open' : opening ? 'invitation is-opening' : 'invitation'} inert={!opened ? true : undefined} aria-hidden={!opened}>
       <header className="hero">
@@ -193,7 +268,15 @@ function App() {
         <p className="section-note">مسیرِ رسیدن به یک شبِ خاطره‌انگیز</p><div className="map-buttons">{[['neshan', 'نشان'], ['balad', 'بلد'], ['google', 'گوگل‌مپ'], ['waze', 'Waze']].map(([id, label]) => <button key={id} onClick={() => map(id)}><MapPin size={14}/>{label}</button>)}</div>
       </section>
 
-      <footer><span className="script" dir="ltr">Sina & Nadia</span><p>۷ آذر ۱۴۰۵ · آغازِ یک عمر دوست داشتن</p><Heart size={15} strokeWidth={1}/><button onClick={() => window.scrollTo({ top: 0, behavior: motionAllowed() ? 'smooth' : 'instant' })} aria-label="بازگشت به ابتدای کارت"><ArrowUp size={17}/></button></footer>
+      <footer>
+        <span className="script" dir="ltr">Sina & Nadia</span>
+        <p>۷ آذر ۱۴۰۵ · آغازِ یک عمر دوست داشتن</p>
+        <p className="rsvp-message calligraphy">
+          احتراماً خواهشمندیم تا <time dateTime="2026-11-21">۳۰ آبان ۱۴۰۵</time> ما را از حضور یا عدم حضور خود در جشن مطلع فرمایید.
+        </p>
+        <Heart size={15} strokeWidth={1}/>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: motionAllowed() ? 'smooth' : 'instant' })} aria-label="بازگشت به ابتدای کارت"><ArrowUp size={17}/></button>
+      </footer>
     </main>
     {opened && <button className={`music-button ${music ? 'playing' : ''}`} onClick={toggleMusic} aria-label={music ? 'توقف موسیقی' : 'پخش موسیقی'} aria-pressed={music}><span className="music-bars"><i/><i/><i/></span><span>موسیقی</span>{music ? <Pause size={15}/> : <Play size={15}/>}</button>}
     {toast && <div className="toast" role="status">{toast}</div>}

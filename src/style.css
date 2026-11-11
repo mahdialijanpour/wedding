@@ -200,3 +200,29 @@ footer{text-align:center;padding:48px 30px 90px;background:#f3f1e9;position:rela
 .timeline-copy small {
   color: #746855;
 }
+
+.boot-message {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  color: #fff9ee;
+  text-align: center;
+}
+
+.open-envelope:disabled .open-caption {
+  animation: none;
+}
+
+footer .rsvp-message {
+  max-width: 390px;
+  margin: 26px auto 20px;
+  color: #4d453b;
+  font-size: clamp(21px, 5.4vw, 27px);
+  line-height: 2.35;
+}
+
+.rsvp-message time {
+  white-space: nowrap;
+}
